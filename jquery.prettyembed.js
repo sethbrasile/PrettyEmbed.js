@@ -83,6 +83,8 @@
 			if ( $(this).attr('data-pe-videoid') !== undefined ) { thisVideoID = $(this).attr('data-pe-videoid'); }
 			else if ( $(this).attr('href') !== undefined ) { thisVideoID = youtube_parser( $(this).attr('href') ); }
 			else { thisVideoID = options.videoID; }
+            
+            $(this).attr('id', thisVideoID);
 
 			// previewsize
 			if ( $(this).attr('data-pe-preview-size') !== undefined ) { thisPreviewSize = $(this).attr('data-pe-preview-size'); }
@@ -215,7 +217,7 @@
 		$('body').on('click', '.pretty-embed', function(e) {
 			e.preventDefault();
 
-			clickEventRunner( $(this) );
+			clickEventRunner( $(e.target) );
 		});
 
 
@@ -233,7 +235,7 @@
 
 			// videoid - set from data-pe- attribute or options
 			if ( obj.attr('data-pe-videoid') !== undefined ) { thisVideoID = obj.attr('data-pe-videoid'); }
-			else if ( options.videoID !== undefined ) { thisVideoID = options.videoID; }
+			else if ( obj.attr('id') !== undefined ) { thisVideoID = obj.attr('id'); }
 			else {
 				thisVideoID = undefined;
 				console.error('PrettyEmbed.js Error:  Misformed or missing video ID.');
